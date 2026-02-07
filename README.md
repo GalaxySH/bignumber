@@ -1,6 +1,6 @@
 # GitLab Issue Number Enhancement
 
-A Firefox extension that makes GitLab issue numbers more prominent on git.doit.wisc.edu, similar to GitHub's design.
+A userscript that makes GitLab issue numbers more prominent on git.doit.wisc.edu, similar to GitHub's design.
 
 ## Features
 
@@ -29,37 +29,42 @@ A Firefox extension that makes GitLab issue numbers more prominent on git.doit.w
 
 ## Installation
 
-### Temporary Installation (for testing)
+### Step 1: Install a Userscript Manager
 
-1. Open Firefox
-2. Navigate to `about:debugging#/runtime/this-firefox`
-3. Click **"Load Temporary Add-on"**
-4. Navigate to the `gitlab-issue-enhancer` directory
-5. Select the `manifest.json` file
+You need a userscript manager extension for your browser. Choose one:
 
-The extension will be active until you close Firefox.
+**For Firefox:**
+- [Tampermonkey](https://addons.mozilla.org/en-US/firefox/addon/tampermonkey/) (Recommended)
+- [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/)
+- [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/)
 
-### Permanent Installation
+**For Chrome/Edge:**
+- [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/)
+- [Violentmonkey](https://chrome.google.com/webstore/detail/violentmonkey/)
 
-#### Option 1: Sign and Install (Recommended)
+### Step 2: Install the Userscript
 
-1. Create an account at [addons.mozilla.org](https://addons.mozilla.org)
-2. Go to [Developer Hub](https://addons.mozilla.org/developers/)
-3. Submit the extension for signing
-4. Once signed, install the `.xpi` file
+**Option A: Direct Installation (If you have the file)**
+1. Open `content.js` in a text editor
+2. Copy the entire contents
+3. Open your userscript manager dashboard (click the extension icon → Dashboard)
+4. Create a new script
+5. Paste the content and save
 
-#### Option 2: Use Developer Edition/Nightly
+**Option B: Click-to-Install (If hosted)**
+1. Click on the `content.js` file (if it has a `.user.js` extension)
+2. Your userscript manager will prompt you to install it
+3. Click "Install"
 
-Firefox Developer Edition and Nightly allow unsigned extensions:
-
-1. Open Firefox Developer Edition/Nightly
-2. Navigate to `about:config`
-3. Set `xpinstall.signatures.required` to `false`
-4. Install using `about:addons` → "Install Add-on From File"
+**Option C: Manual Installation**
+1. Click on your userscript manager icon in the browser toolbar
+2. Select "Create a new script" or "Add new script"
+3. Replace the default template with the contents of `content.js`
+4. Save (Ctrl+S or Cmd+S)
 
 ## Usage
 
-Once installed, the extension works automatically:
+Once installed, the userscript works automatically:
 
 1. Visit any page on `git.doit.wisc.edu`
 2. Issue numbers will automatically be enhanced with:
@@ -72,7 +77,7 @@ No configuration needed - it just works!
 
 ## Testing
 
-To verify the extension is working:
+To verify the userscript is working:
 
 1. Navigate to an issues list: `https://git.doit.wisc.edu/[project]/issues`
 2. Check that issue numbers (e.g., #123) are displayed in larger, green, bold text
@@ -83,30 +88,32 @@ To verify the extension is working:
 ## Troubleshooting
 
 **Issue numbers not enhanced:**
-- Check that you're on git.doit.wisc.edu (extension only works there)
+- Check that you're on git.doit.wisc.edu (userscript only works there)
+- Verify the userscript is enabled in your userscript manager
 - Open browser console (F12) and look for JavaScript errors
 - Try refreshing the page
 
-**Extension not loading:**
-- Verify the extension is enabled in `about:addons`
-- Check for errors in `about:debugging`
+**Userscript not loading:**
+- Verify your userscript manager extension is installed and enabled
+- Check the userscript is enabled in the manager's dashboard
+- Ensure the `@match` directive matches your GitLab URL
 
 **Dark mode colors wrong:**
-- Extension should automatically detect dark mode
+- Userscript should automatically detect dark mode
 - If not, check GitLab's theme attribute on the body element
 
 ## Privacy & Security
 
-- **No network permissions** - Extension cannot make any network requests
+- **No network permissions** - Userscript cannot make any network requests
 - **No data collection** - No analytics, tracking, or data collection
 - **Domain-restricted** - Only runs on git.doit.wisc.edu
 - **Open source** - All code is visible and auditable
 
 ## Technical Details
 
-- **Manifest Version:** 2 (for Firefox compatibility)
-- **Permissions:** None (no special permissions required)
-- **Content Scripts:** JavaScript + CSS injection on git.doit.wisc.edu
+- **Type:** Userscript (Greasemonkey/Tampermonkey compatible)
+- **Permissions:** GM_addStyle (for CSS injection)
+- **Execution:** Runs at document-end for optimal performance
 - **Dynamic Content:** Uses MutationObserver for Vue.js/SPA navigation
 
 ## Development
@@ -114,39 +121,51 @@ To verify the extension is working:
 ### Project Structure
 
 ```
-gitlab-issue-enhancer/
-├── manifest.json          # Extension manifest
-├── content.js            # DOM manipulation script
-├── styles.css            # Issue number styling
-├── icons/                # Extension icons
+bignumber/
+├── content.js            # Userscript with embedded CSS
+├── manifest.json         # (Legacy - kept for posterity)
+├── styles.css            # (Legacy - kept for posterity)
+├── icons/                # (Legacy - kept for posterity)
 │   ├── icon-48.png
 │   └── icon-96.png
+├── INSTALL.txt           # (Legacy - kept for posterity)
 └── README.md            # This file
 ```
 
+**Note:** The `manifest.json`, `styles.css`, `icons/`, and `INSTALL.txt` files are from the original browser extension version and are kept for historical purposes. They are not used by the userscript.
+
 ### Modifying Styles
 
-Edit `styles.css` to change:
+Edit the `cssStyles` constant in `content.js` to change:
 - Font size: `.enhanced-issue-number { font-size: 18px !important; }`
 - Color: `.enhanced-issue-number { color: #1f883d !important; }`
 - Weight: `.enhanced-issue-number { font-weight: 700 !important; }`
 
-After changes, reload the extension in `about:debugging`.
+After changes, save the file in your userscript manager and reload the GitLab page.
 
 ### Debugging
 
-1. Open `about:debugging#/runtime/this-firefox`
-2. Find the extension and click **"Inspect"**
-3. Use the console to view logs and errors
-4. Check the "Content Scripts" tab to see where scripts are injected
+1. Open your browser's developer console (F12)
+2. Navigate to git.doit.wisc.edu
+3. Look for any JavaScript errors
+4. Check that elements with class `enhanced-issue-number` are being created
+5. Use your userscript manager's built-in debugger if available
+
+## Converting Back to Browser Extension
+
+If you need the browser extension version:
+1. The original extension files are preserved in this repository
+2. Use `manifest.json` and `styles.css` as separate files
+3. See the git history for the original extension structure
 
 ## License
 
-This extension is provided as-is for use on git.doit.wisc.edu. Feel free to modify and adapt for your needs.
+This userscript is provided as-is for use on git.doit.wisc.edu. Feel free to modify and adapt for your needs.
 
 ## Support
 
 For issues or questions:
 - Check the browser console for errors
 - Verify you're on the correct domain
-- Ensure the extension is enabled in about:addons
+- Ensure the userscript is enabled in your userscript manager
+- Check that your userscript manager extension is up to date
