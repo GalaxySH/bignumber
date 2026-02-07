@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "GitLab Issue Number Enhancement",
+  "version": "1.0.0",
+  "description": "Makes GitLab issue numbers more prominent on git.doit.wisc.edu",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "gitlab-issue-enhancer@git.doit.wisc.edu",
+      "strict_min_version": "109.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://git.doit.wisc.edu/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+QUICK INSTALLATION GUIDE
+========================
+
+For Testing (Temporary Installation):
+--------------------------------------
+1. Open Firefox
+2. Type in address bar: about:debugging#/runtime/this-firefox
+3. Click "Load Temporary Add-on"
+4. Navigate to this folder and select: manifest.json
+5. Visit git.doit.wisc.edu to see the enhancement
+
+The extension will remain active until you close Firefox.
+
+
+For Permanent Installation:
+---------------------------
+Firefox requires extensions to be signed. Options:
+
+A) Self-host (Firefox Developer/Nightly only):
+   1. Install Firefox Developer Edition or Nightly
+   2. Go to about:config
+   3. Set xpinstall.signatures.required = false
+   4. Go to about:addons
+   5. Click gear icon → "Install Add-on From File"
+   6. Select manifest.json
+
+B) Get it signed by Mozilla:
+   1. Create account at addons.mozilla.org
+   2. Submit extension for signing (free, automated)
+   3. Install the signed .xpi file
+
+
+Verification:
+-------------
+1. Visit: https://git.doit.wisc.edu
+2. Go to any project's issues page
+3. Issue numbers should be:
+   - Larger (18px vs ~12px)
+   - Bold
+   - Green color (#1f883d)
+
+If it's not working:
+- Check the extension is enabled in about:addons
+- Open browser console (F12) to check for errors
+- Make sure you're on git.doit.wisc.edu (not other GitLab sites)
+
+
+Need Help?
+----------
+See README.md for detailed documentation and troubleshooting.
