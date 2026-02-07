@@ -16,6 +16,17 @@ A Firefox extension that makes GitLab issue numbers more prominent on git.doit.w
 - **Zero network activity** - Fully local, no external requests
 - **Domain-specific** - Only runs on git.doit.wisc.edu
 
+## Visual Enhancements Summary
+
+| Location | Font Size | Color | Weight | Special |
+|----------|-----------|-------|--------|---------|
+| General | 18px | #1f883d | 700 | +8px margin-right |
+| Issue Boards | 16px | #1f883d | 700 | Inline (no layout break) |
+| Issue Title | 24px | #1f883d | 700 | +12px margin-right |
+| Dark Mode | 18px | #3fb950 | 700 | Lighter green |
+| Hover (Light) | 18px | #166534 | 700 | Underlined |
+| Hover (Dark) | 18px | #7ee787 | 700 | Underlined |
+
 ## Installation
 
 ### Temporary Installation (for testing)

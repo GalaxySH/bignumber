@@ -52,3 +52,5 @@ firefox-profile/
 
 # Build scripts output
 *.out
+
+gitlab-issue-enhancer/
